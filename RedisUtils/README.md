@@ -41,13 +41,50 @@ katool:
         exp-time: { 5*60*1000 }         # LFU过期时间
         time-unit: milliseconds 		# 过期时间单位
     redis:
-        policy: "default"       		# 多级缓存策略模式选定，默认情况下和cache采用同一个策略，我cache是啥，那么policy就是啥
+        policy: "default"       		# 多级缓存策略模式选定，默认情况下和cache采用同一个策略，我cache是啥，那么policy就是啥，如果想要关闭，那么cache.policy请改为default，，如果需要单独使用其他的缓存工具类，在1.9.6之前不支持，1.9.6之后可以看看下文的方法
         lock:
             internalLockLeaseTime: 30   # 分布式锁默认租约时间
             timeUnit: seconds           # 租约时间单位
 ```
 
-
+> 1.9.6开始出了Caffeine之外，官方还提供了EhCahce作为缓存策略，将policy换为ehcache即可开启
+>
+> 如果我们需要单独使用某个缓存工具类，而想引入到RedisUtil中，可以这样配置
+>
+> ```yaml
+> katool:
+>  cache:
+>      policy: "caffeine"      		# 选择内存缓存策略，caffeine
+>      exp-time: { 5*60*1000 }         # LFU过期时间
+>      time-unit: milliseconds 		# 过期时间单位
+>      ehcache:
+>      	enable: true
+>      	enable-to-disk:true			# 开启多余的缓存存储到磁盘
+>  redis:
+>      policy: "default"       		# 多级缓存策略模式选定，默认情况下和cache采用同一个策略，我cache是啥，那么policy就是啥，如果想要关闭，那么cache.policy请改为default
+>      lock:
+>          internalLockLeaseTime: 30   # 分布式锁默认租约时间
+>          timeUnit: seconds           # 租约时间单位
+> ```
+>
+> 1.9.6.BETA之后，配置类如下：
+>
+> ```yaml
+> katool:
+> 	util：
+> 	 cache:
+>      policy: "caffeine"      		# 选择内存缓存策略，caffeine
+>      exp-time: { 5*60*1000 }         # LFU过期时间
+>      time-unit: milliseconds 		# 过期时间单位
+>      ehcache:
+>      	enable: true
+>      	enable-to-disk:true			# 开启多余的缓存存储到磁盘
+>      redis:
+>          policy: "default"       		# 多级缓存策略模式选定，默认情况下和cache采用同一个策略，我cache是啥，那么policy就是啥，如果想要关闭，那么cache.policy请改为default
+>          lock:
+>              internalLockLeaseTime: 30   # 分布式锁默认租约时间
+>              timeUnit: seconds           # 租约时间单位
+> ```
 
 ## 自动装配
 
@@ -281,3 +318,6 @@ public class RedisUtilConfig {
     }
 }
 ```
+
+除此之外你也可以通过尝试操作`CACHE_POLICY_MAPPER`和`REDIS_UTIL_CACHE_POLICY_MAPPER`来进行修改，但是我们不太推荐
+

@@ -6,13 +6,15 @@ module.exports = {
     nav: [
       { text: 'Home', link: '/' },
       { text: 'Redis工具包', link: '/RedisUtils/' },
-      { text: '图片与Base64转换工具类', link: '/ImageUtils/'},
-      { text: '校验工具类',
+      { text: 'Excel工具包', link: '/ExcelUtils/' },
+      { text: '图片与Base64转换工具包', link: '/ImageUtils/'},
+      { text: '校验工具包',
         items:[
-          { text: 'IP地址工具类（Nginx反向代理解决）',link: '/Verify/IpUtils/'},
-          { text: '身份证校验工具类',link: '/Verify/IdCardValidUtils/'},
-          { text: '验证码工具类', link: '/Verify/GenerateCodeUtil/' },
-          { text: 'AuthUtil',link: '/Verify/AuthUtil/'}
+          { text: 'IP地址工具包（Nginx反向代理解决）',link: '/Verify/IpUtils/'},
+          { text: '身份证校验工具包',link: '/Verify/IdCardValidUtils/'},
+          { text: '验证码工具包', link: '/Verify/GenerateCodeUtil/' },
+          { text: 'AuthUtil',link: '/Verify/AuthUtil/'},
+          { text: 'KaTool-Security鉴权框架',link:'http://auth.katool.cn/'}
       ]},
       { text: '云存储OSS-SDK',
         items:[
@@ -22,7 +24,13 @@ module.exports = {
     },
       { text: '定时任务调度', link: '/ScheDuledTaskUtil/'},
       { text: '类加载和Bean管理', link: '/ClassLoaderAndBeanUtils/'},
-      { text: 'Karos\'Blog', link: 'https://www.wzl.fyi/' },
+      { text: '站外连接',
+        items:[
+          { text: 'KaTool',link: 'https://github.com/Karosown/KaTool'},
+          { text: 'KaToolTest',link: 'https://github.com/Karosown/KaToolTest'},
+          { text: '在github上修改本页面', link: 'https://github.com/Karosown/KaTool-Docs' },
+          { text: 'Karos\'Blog', link: 'https://www.wzl.fyi/' }
+        ]},
     ]
   }
 }
